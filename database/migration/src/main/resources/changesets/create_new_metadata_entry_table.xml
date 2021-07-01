@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet author="sshah" id="create_new_metadata_entry_table" dbms="hsqldb,mariadb,mysql,postgresql">
+        <createTable tableName="NEW_METADATA_ENTRY">
+            <column name="METADATA_JOURNAL_ID" type="BIGINT"> <!-- how to add autoIncrement="true" ? -->
+                <constraints nullable="false"/>
+            </column>
+            <column name="WORKFLOW_EXECUTION_UUID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="METADATA_KEY" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CALL_FQN" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="JOB_SCATTER_INDEX" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="JOB_RETRY_ATTEMPT" type="INT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="METADATA_VALUE" type="LONGTEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="METADATA_TIMESTAMP" type="DATETIME(6)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="METADATA_VALUE_TYPE" type="VARCHAR(10)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!--
+    <changeSet author="sshah" id="new_metadata_table_workflow_index" dbms="hsqldb,mariadb,mysql,postgresql">
+        <createIndex indexName="METADATA_WORKFLOW_IDX" tableName="NEW_METADATA_ENTRY" unique="false">
+            <column name="WORKFLOW_EXECUTION_UUID"/>
+        </createIndex>
+    </changeSet>
+    -->
+
+    <changeSet author="sshah" id="add_primary_key_new_metadata_table">
+        <addPrimaryKey
+                tableName="NEW_METADATA_ENTRY"
+                columnNames="WORKFLOW_EXECUTION_UUID, METADATA_JOURNAL_ID"
+                constraintName="PK_WORKFLOW_EXECUTION_UUID_METADATA_JOURNAL_ID"/>
+    </changeSet>
+
+</databaseChangeLog>

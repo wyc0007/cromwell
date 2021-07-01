@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog objectQuotingStrategy="QUOTE_ALL_OBJECTS"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet author="sshah" id="add_metadata_location_in_summary_table" dbms="hsqldb,mariadb,mysql,postgresql">
+        <addColumn tableName="WORKFLOW_METADATA_SUMMARY_ENTRY">
+            <column name="METADATA_LOCATION" type="VARCHAR(60)">
+                <constraints nullable="true" />
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -38,6 +38,8 @@ trait WorkflowMetadataSummaryEntryComponent {
 
     def metadataArchiveStatus: Rep[Option[String]] = column[Option[String]]("METADATA_ARCHIVE_STATUS", O.Length(30))
 
+    def metadataLocation: Rep[Option[String]] = column[Option[String]]("METADATA_LOCATION", O.Length(60))
+
     def baseProjection = (workflowExecutionUuid, workflowName, workflowStatus, startTimestamp, endTimestamp,
       submissionTimestamp, parentWorkflowExecutionUuid, rootWorkflowExecutionUuid, metadataArchiveStatus)
 
