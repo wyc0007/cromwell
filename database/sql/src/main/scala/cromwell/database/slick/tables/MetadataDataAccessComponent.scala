@@ -5,6 +5,7 @@ import slick.jdbc.JdbcProfile
 class MetadataDataAccessComponent(val driver: JdbcProfile) extends DataAccessComponent
   with CustomLabelEntryComponent
   with MetadataEntryComponent
+  with NewMetadataEntryComponent
   with SummaryStatusEntryComponent
   with SummaryQueueEntryComponent
   with WorkflowMetadataSummaryEntryComponent {
@@ -16,7 +17,8 @@ class MetadataDataAccessComponent(val driver: JdbcProfile) extends DataAccessCom
       metadataEntries.schema ++
       summaryStatusEntries.schema ++
       workflowMetadataSummaryEntries.schema ++
-      summaryQueueEntries.schema
+      summaryQueueEntries.schema ++
+      newMetadataEntries.schema
 
   // Looks like here is the most appropriate place for this val since it doesn't fit neither in
   // SummaryQueueEntryComponent nor in MetadataEntryComponent

@@ -6,8 +6,8 @@
 
     <changeSet author="sshah" id="create_new_metadata_entry_table" dbms="hsqldb,mariadb,mysql,postgresql">
         <createTable tableName="NEW_METADATA_ENTRY">
-            <column name="METADATA_JOURNAL_ID" type="BIGINT"> <!-- how to add autoIncrement="true" ? -->
-                <constraints nullable="false"/>
+            <column autoIncrement="true" name="METADATA_JOURNAL_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="PK_METADATA_JOURNAL_ID"/>
             </column>
             <column name="WORKFLOW_EXECUTION_UUID" type="VARCHAR(255)">
                 <constraints nullable="false"/>
@@ -44,11 +44,13 @@
     </changeSet>
     -->
 
+    <!-- How to set a composite PK with METADATA_JOURNAL_ID as auto-increment?
     <changeSet author="sshah" id="add_primary_key_new_metadata_table">
         <addPrimaryKey
                 tableName="NEW_METADATA_ENTRY"
                 columnNames="WORKFLOW_EXECUTION_UUID, METADATA_JOURNAL_ID"
                 constraintName="PK_WORKFLOW_EXECUTION_UUID_METADATA_JOURNAL_ID"/>
     </changeSet>
+    -->
 
 </databaseChangeLog>
