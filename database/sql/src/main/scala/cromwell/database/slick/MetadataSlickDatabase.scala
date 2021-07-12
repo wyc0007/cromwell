@@ -138,6 +138,8 @@ class MetadataSlickDatabase(originalDatabaseConfig: Config)
 
   // TODO: Saloni - need to change this for archiving
   override def streamMetadataEntries(workflowExecutionUuid: String): DatabasePublisher[MetadataEntry] = {
+    // check if metadata entries exist in old table, new table or both. Then get entries from there.
+    // Same for deleting entries
     val action = dataAccess.metadataEntriesForWorkflowSortedById(workflowExecutionUuid)
       .result
       .withStatementParameters(

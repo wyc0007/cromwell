@@ -26,7 +26,7 @@ class MetadataDataAccessComponent(val driver: JdbcProfile) extends DataAccessCom
     Compiled(
       (limit: ConstColumn[Long]) => (for {
         summaryEntry <- summaryQueueEntries.take(limit)
-        metadataEntry <- metadataEntries if metadataEntry.metadataEntryId === summaryEntry.metadataJournalId
+        metadataEntry <- newMetadataEntries if metadataEntry.metadataEntryId === summaryEntry.metadataJournalId
       } yield metadataEntry).sortBy(_.metadataEntryId)
     )
   }
