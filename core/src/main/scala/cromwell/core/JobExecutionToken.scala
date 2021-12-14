@@ -1,6 +1,7 @@
 package cromwell.core
 
 import java.util.UUID
+
 import _root_.io.circe.generic.JsonCodec
 import cromwell.core.JobExecutionToken.JobExecutionTokenType
 

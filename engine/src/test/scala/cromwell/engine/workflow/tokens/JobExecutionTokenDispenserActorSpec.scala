@@ -52,7 +52,7 @@ class JobExecutionTokenDispenserActorSpec extends TestKitSuite
     actorRefUnderTest ! JobExecutionTokenRequest(hogGroupA, TestInfiniteTokenType)
     expectMsg(max = MaxWaitTime, JobExecutionTokenDispensed)
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe true
-    actorRefUnderTest.underlyingActor.tokenAssignments(self).get().jobExecutionTokenType shouldBe TestInfiniteTokenType
+    actorRefUnderTest.underlyingActor.tokenAssignments(self).tokenLease.get().jobExecutionTokenType shouldBe TestInfiniteTokenType
   }
 
   it should "accept return of an infinite token correctly" in {
@@ -64,7 +64,7 @@ class JobExecutionTokenDispenserActorSpec extends TestKitSuite
     actorRefUnderTest ! JobExecutionTokenRequest(hogGroupA, TestInfiniteTokenType)
     expectMsg(max = MaxWaitTime, JobExecutionTokenDispensed)
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe true
-    actorRefUnderTest.underlyingActor.tokenAssignments(self).get().jobExecutionTokenType shouldBe TestInfiniteTokenType
+    actorRefUnderTest.underlyingActor.tokenAssignments(self).tokenLease.get().jobExecutionTokenType shouldBe TestInfiniteTokenType
     actorRefUnderTest ! JobExecutionTokenReturn
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe false
   }
@@ -114,7 +114,7 @@ class JobExecutionTokenDispenserActorSpec extends TestKitSuite
     actorRefUnderTest ! JobExecutionTokenRequest(hogGroupA, LimitedTo5Tokens)
     expectMsg(max = MaxWaitTime, JobExecutionTokenDispensed)
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe true
-    actorRefUnderTest.underlyingActor.tokenAssignments(self).get().jobExecutionTokenType shouldBe LimitedTo5Tokens
+    actorRefUnderTest.underlyingActor.tokenAssignments(self).tokenLease.get().jobExecutionTokenType shouldBe LimitedTo5Tokens
   }
 
   it should "accept return of a limited token type correctly" in {
@@ -126,7 +126,7 @@ class JobExecutionTokenDispenserActorSpec extends TestKitSuite
     actorRefUnderTest ! JobExecutionTokenRequest(hogGroupA, LimitedTo5Tokens)
     expectMsg(max = MaxWaitTime, JobExecutionTokenDispensed)
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe true
-    actorRefUnderTest.underlyingActor.tokenAssignments(self).get().jobExecutionTokenType shouldBe LimitedTo5Tokens
+    actorRefUnderTest.underlyingActor.tokenAssignments(self).tokenLease.get().jobExecutionTokenType shouldBe LimitedTo5Tokens
     actorRefUnderTest ! JobExecutionTokenReturn
     actorRefUnderTest.underlyingActor.tokenAssignments.contains(self) shouldBe false
   }
